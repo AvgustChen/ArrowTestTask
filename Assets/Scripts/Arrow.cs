@@ -29,12 +29,12 @@ public class Arrow : MonoBehaviour
     public void Move(float force)
     {
         Destroy(gameObject, lifetime);
-        speed = force * 10f; 
-        Vector2 direction = transform.right; 
+        speed = force * 10f;
+        Vector2 direction = transform.right;
 
         if (rb != null)
         {
-            rb.velocity = direction * speed; 
+            rb.velocity = direction * speed;
         }
 
     }
@@ -50,5 +50,7 @@ public class Arrow : MonoBehaviour
         rb.isKinematic = true;
         transform.SetParent(other.transform);
         skeletonAnimation.AnimationState.SetAnimation(0, "attack", false);
+        if (other.CompareTag("Enemy"))
+            other.GetComponent<Enemy>().Die();
     }
 }
